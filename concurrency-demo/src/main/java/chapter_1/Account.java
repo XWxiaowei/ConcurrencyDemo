@@ -20,10 +20,11 @@ public class Account {
     /**
      * 取款
      */
-    void withdrow(Integer amt) {
+   public void withdrow(Integer amt) {
         synchronized (balLock) {
             if (balance > amt) {
                 balance -= amt;
+                System.out.println("*******扣除后的余额是="+balance);
             }
         }
     }
@@ -32,8 +33,9 @@ public class Account {
      * 查看余额
      * @return
      */
-    int getSBalance() {
+    public int getSBalance() {
         synchronized (balLock) {
+            System.out.println("******读取到的余额是="+balance);
             return balance;
         }
     }
@@ -42,7 +44,7 @@ public class Account {
      * 更改密码
      * @param newPwd
      */
-    void updatePwd(String newPwd) {
+    public   void updatePwd(String newPwd) {
         synchronized (pwdLock) {
             password = newPwd;
         }
@@ -52,7 +54,7 @@ public class Account {
      * 查看密码
      * @return
      */
-    String getNewPwd() {
+    public  String getNewPwd() {
         synchronized (pwdLock) {
             return password;
         }
