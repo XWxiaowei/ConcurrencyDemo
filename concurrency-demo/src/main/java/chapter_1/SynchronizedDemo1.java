@@ -16,4 +16,8 @@ public class SynchronizedDemo1 {
     synchronized void addOne() {
         value += 1;
     }
+
+    public static void main(String[] args) {
+
+    }
 }

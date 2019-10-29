@@ -29,9 +29,8 @@ public class LongTest {
         });
 
         threadA.start();
-        threadB.start();
-
         threadA.join();
+        threadB.start();
         threadB.join();
         System.out.println("*******获得到的atest值为=" + longTest.atest);
     }

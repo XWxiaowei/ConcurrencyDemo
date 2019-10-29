@@ -1,4 +1,6 @@
-package chapter_1;
+package chapter_1.happenbefore;
+
+import chapter_1.Account;
 
 /**
  * 保护有关联关系的多个资源
