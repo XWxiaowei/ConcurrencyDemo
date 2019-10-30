@@ -1,4 +1,4 @@
-package chapter_1;
+package chapter_1.synchronize;
 
 /**
  * addOne()方法锁定的是SynchronizedDemo2的class对象
@@ -16,4 +16,6 @@ public class SynchronizedDemo2 {
     synchronized static void addOne() {
         value += 1;
     }
+
+
 }

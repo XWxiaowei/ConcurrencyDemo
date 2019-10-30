@@ -1,4 +1,4 @@
-package chapter_1;
+package chapter_1.synchronize;
 
 /**
  * getValue()方法和addOne()方法都是锁定实例对象this的。
