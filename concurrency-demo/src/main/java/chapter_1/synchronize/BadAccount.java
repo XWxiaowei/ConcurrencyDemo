@@ -1,4 +1,4 @@
-package chapter_1;
+package chapter_1.synchronize;
 
 /**
  * 用balance做锁对象不可以，因为解锁时balance就已经发生了变化，

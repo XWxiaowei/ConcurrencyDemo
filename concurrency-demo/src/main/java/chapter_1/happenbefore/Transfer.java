@@ -1,6 +1,6 @@
 package chapter_1.happenbefore;
 
-import chapter_1.Account;
+import chapter_1.synchronize.Account;
 
 /**
  * 保护有关联关系的多个资源
@@ -26,17 +26,13 @@ public class Transfer {
         }
     }
 
-
-    void transfer2(Account target, int amt) {
-        synchronized (this) {
+    void transfer3(Account target, int amt) {
+        synchronized (Account.class) {
             if (balance > amt) {
-                this.balance -= amt;
-                synchronized (target) {
-                    target.setBalance(target.getBalance() + amt);
-                }
+                this.balance = balance - amt;
+                target.setBalance(target.getBalance() + amt);
             }
         }
     }
-
 
 }

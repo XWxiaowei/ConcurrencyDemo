@@ -1,8 +1,7 @@
 package chapter_1.deadlock;
 
 
-import chapter_1.Account;
-import chapter_1.BadAccount;
+import chapter_1.synchronize.BadAccount;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;

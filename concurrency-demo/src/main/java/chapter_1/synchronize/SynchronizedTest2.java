@@ -6,7 +6,7 @@ package chapter_1.synchronize;
  * @author xiang.wei
  * @date 2019/10/10 19:02
  */
-public class SynchronizedDemo2 {
+public class SynchronizedTest2 {
     static int value = 0;
 
     synchronized int getValue() {

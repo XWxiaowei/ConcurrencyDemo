@@ -1,4 +1,4 @@
-package chapter_1;
+package chapter_1.synchronize;
 
 /**
  * 存款取款和修改密码
@@ -13,9 +13,9 @@ public class Account {
     //密码保护锁
     private final Object pwdLock = new Object();
 
-    private Integer balance = 100;
+    public Integer balance = 100;
 
-    private String password = null;
+    public String password = null;
 
     /**
      * 取款
