@@ -1,4 +1,4 @@
-package chapter_1.deadlock;
+package chapter_1.notify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.List;
  * @author xiang.wei
  * @date 2019/10/31 11:17
  */
-public class Allocator {
+public class AllocatorNotify {
     private List<Object> applyList = new ArrayList<Object>();
 
-    private final static Allocator allocator = new Allocator();
+    private final static AllocatorNotify allocator = new AllocatorNotify();
 
-    private Allocator() {
+    private AllocatorNotify() {
 
     }
 
@@ -23,21 +23,24 @@ public class Allocator {
      *
      * @return
      */
-    public static Allocator getAllocator() {
+    public static AllocatorNotify getAllocator() {
         return allocator;
     }
 
     /**
      * 申请资源
      */
-    public synchronized boolean applyResource(Object from, Object to) {
+    public synchronized void applyResource(Object from, Object to)  {
         if (applyList.contains(from) ||
                 applyList.contains(to)) {
-            return false;
+            try {
+                wait();
+            } catch (InterruptedException e) {
+
+            }
         }
         applyList.add(from);
         applyList.add(to);
-        return true;
     }
 
     /**
@@ -46,6 +49,7 @@ public class Allocator {
     public synchronized void free(Object from, Object to) {
         applyList.remove(from);
         applyList.remove(to);
+        notifyAll();
     }
 
 }
