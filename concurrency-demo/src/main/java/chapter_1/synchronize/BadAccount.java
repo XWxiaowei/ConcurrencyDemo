@@ -9,16 +9,21 @@ package chapter_1.synchronize;
 public class BadAccount {
     private Integer balance = 1000;
 
-    private String password = null;
+    //取款保护锁
+    private final Object balLock1 = new Object();
+
+    //取款保护锁
+    private final Object balLock2 = new Object();
 
     /**
      * 取款
      */
-    public void withdrow(Integer amt) {
-        synchronized (balance) {
+    public void withdrow(Integer amt) throws InterruptedException {
+        synchronized (balLock1) {
             if (balance > amt) {
                 balance -= amt;
-                System.out.println("*******扣除后的余额是="+balance);
+                Thread.sleep(100);
+                System.out.println("*******" + Thread.currentThread().getName() + "扣除后的余额是=" + balance);
             }
         }
     }
@@ -27,10 +32,36 @@ public class BadAccount {
      * 查看余额
      * @return
      */
-    public int getSBalance() {
-        synchronized (balance) {
-            System.out.println("******读取到的余额是="+balance);
+    public int getSBalance() throws InterruptedException {
+        synchronized (balLock2) {
+            Thread.sleep(100);
+            System.out.println("*******" + Thread.currentThread().getName() + "读取到的余额是=" + balance);
             return balance;
+        }
+    }
+    public static void main(String[] args) {
+        final BadAccount account = new BadAccount();
+        for (int i = 0; i < 5; i++) {
+            Thread threadA = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        account.withdrow(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, "写线程" + i);
+            Thread threadB = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        account.getSBalance();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, "读线程" + i);
+            threadA.start();
+            threadB.start();
         }
     }
 }
