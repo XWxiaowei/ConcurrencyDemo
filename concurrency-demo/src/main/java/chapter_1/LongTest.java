@@ -5,11 +5,11 @@ package chapter_1;
  * @date 2019/10/28 16:45
  */
 public class LongTest {
-    private  long atest = 0L;
+    private long atest = 0L;
 
 
     public  void countTest() {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100000; i++) {
             atest = atest + 1;
         }
     }
@@ -21,16 +21,14 @@ public class LongTest {
                 longTest.countTest();
             }
         });
-
         Thread threadB = new Thread(new Runnable() {
             public void run() {
                 longTest.countTest();
             }
         });
-
         threadA.start();
-        threadA.join();
         threadB.start();
+        threadA.join();
         threadB.join();
         System.out.println("*******获得到的atest值为=" + longTest.atest);
     }
