@@ -55,7 +55,7 @@ public class ConditionTest {
             lock.lock();
             try {
                 System.out.println("signal的时间是="+System.currentTimeMillis());
-                condition.signal();
+                condition.signalAll();
                 Thread.sleep(3000);
                 System.out.println("**********这是signal之后的代码");
             } catch (InterruptedException exception) {

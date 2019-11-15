@@ -55,8 +55,10 @@ public class DeadLockDealTest3 {
         @Override
         public void run() {
             try {
+                System.out.println("********"+Thread.currentThread().getName()+"开始思考");
                 //思考一段时间
                 Thread.sleep(1000);
+                System.out.println("********"+Thread.currentThread().getName()+"思考完毕");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -69,8 +71,9 @@ public class DeadLockDealTest3 {
                 }
                 synchronized (right) {
                     try {
-                        System.out.println("********开始吃饭");
+                        System.out.println("********"+Thread.currentThread().getName()+"开始吃饭");
                         Thread.sleep(1000);
+                        System.out.println("********"+Thread.currentThread().getName()+"吃完饭");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
