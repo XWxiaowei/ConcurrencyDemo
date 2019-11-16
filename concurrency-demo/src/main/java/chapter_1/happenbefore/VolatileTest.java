@@ -6,15 +6,16 @@ package chapter_1.happenbefore;
  */
 public class VolatileTest {
     private volatile  boolean flag = false;
-    private   int a = 0;
+    private  int a = 0;
 
     public void writer() {
         a = 43;
+        System.out.println(""+Thread.currentThread().getName()+"写入到的a值是="+a);
         flag = true;
     }
     public void read() {
         if (flag) {
-            System.out.println("读取到的a值是="+a);
+            System.out.println(""+Thread.currentThread().getName()+"读取到的a值是="+a);
         }
     }
 
@@ -24,13 +25,13 @@ public class VolatileTest {
             public void run() {
                 volatileTest.writer();
             }
-        });
+        },"线程A");
         threadA.start();
         Thread threadB = new Thread(new Runnable() {
             public void run() {
                 volatileTest.read();
             }
-        });
+        },"线程B");
         threadB.start();
 
     }

@@ -1,21 +1,23 @@
-package chapter_1;
+package chapter_1.cas;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author xiang.wei
- * @date 2019/10/28 16:45
+ * @date 2019/11/16 13:55
  */
-public class LongTest {
-    private long atest = 0L;
+public class AtomicLongTest {
+    private AtomicLong atest = new AtomicLong(0);
 
 
     public  void countTest() {
         for (int i = 0; i < 10000; i++) {
-            atest = atest + 1;
+            atest.getAndIncrement();
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        final LongTest longTest = new LongTest();
+        final AtomicLongTest longTest = new AtomicLongTest();
         Thread threadA = new Thread(new Runnable() {
             public void run() {
                 longTest.countTest();
