@@ -1,7 +1,10 @@
 package chapter_1.deadlock;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,7 +16,8 @@ public class DeadLockDealTest2 {
     public static void main(String[] args) {
         ReentrantLock left = new ReentrantLock();
         ReentrantLock right = new ReentrantLock();
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("线程-%d").build();
+        ExecutorService executorService = Executors.newCachedThreadPool(threadFactory);
         int sum = 5;
         for (int i = 0; i < sum; i++) {
             executorService.execute(new Philosopher(left, right));

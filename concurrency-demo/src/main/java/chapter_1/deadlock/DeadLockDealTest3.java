@@ -1,7 +1,10 @@
 package chapter_1.deadlock;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * @author xiang.wei
@@ -9,7 +12,8 @@ import java.util.concurrent.Executors;
  */
 public class DeadLockDealTest3 {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("线程-%d").build();
+        ExecutorService executorService = Executors.newCachedThreadPool(threadFactory);
         int sum = 5;
         Chopsticks[] chopsticks = new Chopsticks[sum];
         for (int i = 0; i < sum; i++) {

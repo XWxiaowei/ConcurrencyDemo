@@ -5,10 +5,10 @@ package chapter_1;
  * @date 2019/10/28 16:45
  */
 public class LongTest {
-    private long atest = 0L;
+    private long atest = 0;
 
 
-    public  void countTest() {
+    public void countTest() {
         for (int i = 0; i < 10000; i++) {
             atest = atest + 1;
         }

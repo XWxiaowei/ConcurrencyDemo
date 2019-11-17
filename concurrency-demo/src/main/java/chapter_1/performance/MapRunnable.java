@@ -87,7 +87,6 @@ public class MapRunnable {
 //        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("测试-%d").build();
 //        ExecutorService se = new ThreadPoolExecutor(10, 300, 1, TimeUnit.SECONDS,
 //                new LinkedBlockingQueue<>(), threadFactory, new ThreadPoolExecutor.AbortPolicy());
-//        ExecutorService se = Executors.newCachedThreadPool();
         ExecutorService se=new ThreadPoolExecutor(5, 2*threadCount,
                 1L, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>());
