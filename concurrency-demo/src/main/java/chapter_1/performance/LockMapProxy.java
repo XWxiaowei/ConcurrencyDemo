@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * 通过一个代理类，封装Map接口，主要是对其进行安全性处理
  * Created by xiang.wei on 2019/11/17
  *
  * @author xiang.wei
