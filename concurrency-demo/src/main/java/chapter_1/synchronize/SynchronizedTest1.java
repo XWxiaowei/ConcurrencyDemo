@@ -16,13 +16,14 @@ public class SynchronizedTest1 {
 
     synchronized void addThousand() {
         System.out.println("*********当前线程" + Thread.currentThread().getName()+"执行开始");
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 600000; i++) {
             value += 1;
         }
         System.out.println("*********当前线程" + Thread.currentThread().getName()+"执行结束");
     }
 
     public static void main(String[] args) throws InterruptedException {
+        long startTime = System.currentTimeMillis();
         final SynchronizedTest1 synchronizedTest1 = new SynchronizedTest1();
         Thread threadA = new Thread(new Runnable() {
             public void run() {
@@ -38,6 +39,7 @@ public class SynchronizedTest1 {
         threadB.start();
         threadA.join();
         threadB.join();
-        System.out.println("**********计算得到的结果="+synchronizedTest1.getValue());
+        long time = System.currentTimeMillis() - startTime;
+        System.out.println("*******耗时="+time+"获得到的atest值为=" + synchronizedTest1.value);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -17,11 +18,11 @@ public class LockMapProxy<K, V> implements Map<K, V> {
 
     private Map<K, V> origin;
 
-    private ReadWriteLock lock;
+    private ReentrantLock lock;
 
     public LockMapProxy(Map<K, V> origin) {
         this.origin = origin;
-        this.lock = new ReentrantReadWriteLock();
+        this.lock = new ReentrantLock();
     }
 
     public <K, V> LockMapProxy<K, V> LockMap(Map<K, V> map) {
@@ -45,20 +46,15 @@ public class LockMapProxy<K, V> implements Map<K, V> {
     }
 
     public V get(Object key) {
-        lock.readLock().lock();
-        try {
-            return origin.get(key);
-        } finally {
-            lock.readLock().unlock();
-        }
+        return origin.get(key);
     }
 
     public V put(K key, V value) {
-        lock.writeLock().lock();
+        lock.lock();
         try {
             return origin.put(key, value);
         } finally {
-            lock.writeLock().unlock();
+            lock.unlock();
         }
     }
 
@@ -71,11 +67,11 @@ public class LockMapProxy<K, V> implements Map<K, V> {
     }
 
     public void clear() {
-        lock.writeLock().lock();
+        lock.lock();
         try {
             origin.clear();
         }finally {
-            lock.writeLock().unlock();
+            lock.unlock();
         }
     }
 

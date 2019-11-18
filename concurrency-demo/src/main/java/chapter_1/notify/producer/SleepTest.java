@@ -1,6 +1,7 @@
 package chapter_1.notify.producer;
 
 /**
+ * sleeep休眠，释放CPU的执行权限
  * @author xiang.wei
  * @date 2019/11/15 14:15
  */

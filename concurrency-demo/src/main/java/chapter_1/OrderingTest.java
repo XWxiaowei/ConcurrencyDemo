@@ -42,7 +42,7 @@ public class OrderingTest {
  *     SW D,Rd                                   IF  X    ID  EX   MEM WB
  *
  *    重排后
- *     LW Ra,B   IF ID EX MEM  WB
+ *     LW Rb,B   IF ID EX MEM  WB
  *     LW Rc,C     IF ID  EX  MEM  WB
  *     LW Re E        IF  ID   EX  MEM WB
  * ADD Ra,Rb,Rc           IF  ID   EX  MEM  WB

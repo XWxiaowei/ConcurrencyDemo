@@ -11,12 +11,13 @@ public class AtomicLongTest {
 
 
     public  void countTest() {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 600000; i++) {
             atest.getAndIncrement();
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
+        long startTime = System.currentTimeMillis();
         final AtomicLongTest longTest = new AtomicLongTest();
         Thread threadA = new Thread(new Runnable() {
             public void run() {
@@ -32,6 +33,7 @@ public class AtomicLongTest {
         threadB.start();
         threadA.join();
         threadB.join();
-        System.out.println("*******获得到的atest值为=" + longTest.atest);
+        long time = System.currentTimeMillis() - startTime;
+        System.out.println("*******耗时="+time+"获得到的atest值为=" + longTest.atest);
     }
 }

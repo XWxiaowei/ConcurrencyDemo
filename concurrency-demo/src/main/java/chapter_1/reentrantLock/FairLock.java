@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2019/11/15 20:24
  */
 public class FairLock {
-    final Lock lock = new ReentrantLock(true);
+    final Lock lock = new ReentrantLock();
     //创建十个线程
     public static void main(String[] args) {
         final FairLock fairLock = new FairLock();

@@ -87,23 +87,24 @@ public class MapRunnable {
 //        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("测试-%d").build();
 //        ExecutorService se = new ThreadPoolExecutor(10, 300, 1, TimeUnit.SECONDS,
 //                new LinkedBlockingQueue<>(), threadFactory, new ThreadPoolExecutor.AbortPolicy());
-        ExecutorService se=new ThreadPoolExecutor(5, 2*threadCount,
-                1L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+//        ExecutorService se=new ThreadPoolExecutor(5, 2*threadCount,
+//                1L, TimeUnit.SECONDS,
+//                new SynchronousQueue<Runnable>());
+        ExecutorService se = Executors.newCachedThreadPool();
         //同时开启2*threadCount个读写线程
         for (int i = 0; i < threadCount; i++) {
             se.execute(writeRun);
-            se.execute(readrun);
+//            se.execute(readrun);
+//            new Thread(writeRun,"每天的一天").start();
         }
-        //统计
-        try {
-            cyclicBarrier.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (BrokenBarrierException e) {
-            e.printStackTrace();
-        }
-        se.shutdown();
+//        //统计
+//        try {
+//            cyclicBarrier.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (BrokenBarrierException e) {
+//            e.printStackTrace();
+//        }
         map.clear();
         //所有线程都执行完成之后，才会跑到这一步
         long duration = (System.currentTimeMillis() - starttime);

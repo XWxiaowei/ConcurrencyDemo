@@ -5,7 +5,7 @@ package chapter_1;
  * @date 2019/10/28 16:45
  */
 public class LongTest {
-    private long atest = 0;
+    private  long atest = 0;
 
 
     public void countTest() {
