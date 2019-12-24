@@ -9,22 +9,20 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 多线程操作死循环复现
- *
  * @author xiang.wei
- * @date 2019/12/21 15:40
+ * @date 2019/12/24 9:27
  */
-public class HashMapThreadTest {
+public class HashMapThreadTest2 {
     /**
      * 创建一个HashMap类变量，指定数组空间为2
      */
     static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws BrokenBarrierException, InterruptedException {
         //控制并发原子操作
         final AtomicInteger at = new AtomicInteger(0);
-        //并发计数器
-        CountDownLatch countDownLatch = new CountDownLatch(1000);
+        //栅栏
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(1000);
         for (int i = 0; i < 1000; i++) {
             new Thread(new Runnable() {
                 @Override
@@ -35,16 +33,21 @@ public class HashMapThreadTest {
 //                    map.put(i1, i1);
                     int i1 = at.incrementAndGet();
                     map.put(i1, i1);
-                    countDownLatch.countDown();
+                    try {
+                        cyclicBarrier.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (BrokenBarrierException e) {
+                        e.printStackTrace();
+                    }
                 }
             }).start();
         }
-        countDownLatch.await();
+        cyclicBarrier.await();
         for (Integer key : map.keySet()) {
             System.out.println("******key:" + key + ",value:" + map.get(key));
         }
         System.out.println("***********当前容器的大小={}"+map.size());
 
     }
-
 }
