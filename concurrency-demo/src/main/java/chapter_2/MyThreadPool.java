@@ -59,8 +59,8 @@ public class MyThreadPool {
     }
 
     public static void main(String[] args) {
-        MyThreadPool threadPool = new MyThreadPool(10, new LinkedBlockingQueue<>());
-        threadPool.execute(() -> System.out.println("************你好，2019-11-28"));
+//        MyThreadPool threadPool = new MyThreadPool(10, new LinkedBlockingQueue<>());
+//        threadPool.execute(() -> System.out.println("************你好，2019-11-28"));
     }
 
 }

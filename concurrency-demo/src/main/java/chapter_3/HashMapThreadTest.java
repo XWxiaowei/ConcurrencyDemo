@@ -24,7 +24,7 @@ public class HashMapThreadTest {
         //控制并发原子操作
         final AtomicInteger at = new AtomicInteger(0);
         //并发计数器
-        CountDownLatch countDownLatch = new CountDownLatch(1000);
+        final CountDownLatch countDownLatch = new CountDownLatch(1000);
         for (int i = 0; i < 1000; i++) {
             new Thread(new Runnable() {
                 @Override
@@ -43,7 +43,7 @@ public class HashMapThreadTest {
         for (Integer key : map.keySet()) {
             System.out.println("******key:" + key + ",value:" + map.get(key));
         }
-        System.out.println("***********当前容器的大小={}"+map.size());
+        System.out.println("***********当前容器的大小={}" + map.size());
 
     }
 

@@ -195,7 +195,7 @@ HashMap的构造器主要是给这几个属性设值。	正如前面说到的Has
     }
 ```
 下面举个例子说明下扩容过程。假设了我们的hash算法就是简单的用key mod 一下表的大小（也就是数组的长度）。其中的哈希桶数组table的size=2， 所以key = 3、7、5，put顺序依次为 3、7、5。在mod 2以后都冲突在table[1]这里了。这里假设负载因子 loadFactor=1，即当键值对的实际大小size 大于 table的实际大小时进行扩容。接下来的三个步骤是哈希桶数组 resize成4，然后所有的Node重新rehash的过程。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019122116243583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ1MzQ4MDg=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191225100558973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ1MzQ4MDg=,size_16,color_FFFFFF,t_70)
 经过观测可以发现，我们使用的是2次幂的扩展（指长度扩为原来的两倍），所以元素的位置要么在原来位置，要么是在原来位置再移动2次幂的位置，看下图就可以明白这句话的意思，n为table的长度，图（a）表示扩容前key1和key2确定的索引位置示例，图（b）表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的哈希与高位运算结果。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191221162500837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ1MzQ4MDg=,size_16,color_FFFFFF,t_70)
 元素在重新计算hash之后,因为n变为2倍，那么n-1的mask范围在高位多1bit(红色) 因此新的index就会发生这样的变化：

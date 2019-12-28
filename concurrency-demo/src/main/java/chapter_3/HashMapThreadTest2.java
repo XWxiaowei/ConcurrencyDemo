@@ -1,10 +1,7 @@
 package chapter_3;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,13 +13,13 @@ public class HashMapThreadTest2 {
     /**
      * 创建一个HashMap类变量，指定数组空间为2
      */
-    static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
+    static HashMap<Integer, Integer> map = new HashMap<>();
 
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException {
         //控制并发原子操作
         final AtomicInteger at = new AtomicInteger(0);
         //栅栏
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(1000);
+        final CyclicBarrier cyclicBarrier = new CyclicBarrier(1000);
         for (int i = 0; i < 1000; i++) {
             new Thread(new Runnable() {
                 @Override
@@ -47,7 +44,7 @@ public class HashMapThreadTest2 {
         for (Integer key : map.keySet()) {
             System.out.println("******key:" + key + ",value:" + map.get(key));
         }
-        System.out.println("***********当前容器的大小={}"+map.size());
+        System.out.println("***********当前容器的大小={}" + map.size());
 
     }
 }
