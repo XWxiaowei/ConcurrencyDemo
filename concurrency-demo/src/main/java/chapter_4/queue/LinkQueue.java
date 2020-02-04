@@ -7,12 +7,12 @@ package chapter_4.queue;
  */
 public class LinkQueue {
     /**
-     * 队头指针
+     * 队列的队首
      */
     private volatile Node head;
 
     /**
-     * 队尾指针
+     * 队列的队尾
      */
     private volatile Node tail;
 
@@ -25,7 +25,7 @@ public class LinkQueue {
      * 初始化队列
      */
     public LinkQueue() {
-        head = tail = new Node(null);
+        head = tail = null;
     }
 
     /**
@@ -35,13 +35,14 @@ public class LinkQueue {
      */
     public void enqueue(String item) {
         Node newNode = new Node(item);
-        tail = head;
-        while (tail.next != null) {
+        //队列没有元素
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
             tail = tail.next;
         }
-        tail.next = null;
-        tail = newNode;
-        ++size;
     }
 
     /**
@@ -50,19 +51,30 @@ public class LinkQueue {
      * @return
      */
     public Object dequeue() {
+        //队列为空
+        if (head == null) {
+            return null;
+        }
+        String value = head.value;
         head = head.next;
-        size--;
-        return head.value;
+        //队列为空
+        if (head == null) {
+            tail = null;
+        }
+        return value;
     }
 
     /**
      * 遍历队列
      * @return
      */
-    public  String pringQueue() {
+    public  String printQueue() {
         StringBuilder queueStr = new StringBuilder();
-        for (Node node = head.next; node == null; node = head.next) {
-            queueStr.append(head.next.value+"-->");
+        Node p = head;
+        while (p != null) {
+            queueStr.append(p.value+"-->");
+            p = p.next;
+
         }
         return queueStr.toString();
     }
@@ -71,10 +83,12 @@ public class LinkQueue {
         for (int i = 0; i < 6; i++) {
             linkQueue.enqueue("测试" + i);
         }
-        System.out.println("队列="+linkQueue.pringQueue());
+        System.out.println("队列="+linkQueue.printQueue());
         for (int i = 0; i < linkQueue.size; i++) {
             linkQueue.dequeue();
         }
+        System.out.println("队列="+linkQueue.printQueue());
+
     }
 
 
@@ -82,18 +96,18 @@ public class LinkQueue {
         /**
          * 数据域
          */
-        Object value;
+        String value;
         /**
          * 下一个结点对象的引用
          */
         Node next;
 
-        public Node(Object value, Node next) {
+        public Node(String value, Node next) {
             this.value = value;
             this.next = next;
         }
 
-        public Node(Object value) {
+        public Node(String value) {
             this.value = value;
         }
 
