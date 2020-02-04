@@ -1,4 +1,4 @@
-package chapter_4;
+package chapter_4.queue;
 
 /**
  * 用数组实现队列
@@ -67,10 +67,9 @@ public class ArrayQueue {
     }
     /**
      * 出队
-     * @param item
      * @return
      */
-    public String dequeue(String item) {
+    public String dequeue() {
         //如果head==tail,表示队列为空
         if (head == tail) {
             return null;
@@ -87,7 +86,7 @@ public class ArrayQueue {
             System.out.println("********入队的数据是={}"+"测试" + i);
         }
         for (int j=0;j<15;j++) {
-            arrayQueue.dequeue("测试" + j);
+            arrayQueue.dequeue();
             System.out.println("********出队的数据是={}"+"测试" + j);
         }
     }
