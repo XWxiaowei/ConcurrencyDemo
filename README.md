@@ -1,9 +1,12 @@
-# ConcurrencyDemo
-Java并发编程实战
+ - [Java并发编程（一）---原子性，可见性，有序性](https://blog.csdn.net/u014534808/article/details/102782286)
+ - [Java并发编程（二）---Java内存模型](https://blog.csdn.net/u014534808/article/details/102801894)
+ - [Java并发编程（三）---synchonized解决原子性问题](https://blog.csdn.net/u014534808/article/details/102826264)
+ - [Java并发编程（四）--- 死锁的发生与避免](https://blog.csdn.net/u014534808/article/details/102844796)
+ - [Java并发编程（五）---线程通信](https://blog.csdn.net/u014534808/article/details/102864295)
+ - [Java并发编程（六）---lock](https://blog.csdn.net/u014534808/article/details/102928085)
+ - [Java并发编程（7）---ThreadLocal的运用](https://blog.csdn.net/u014534808/article/details/102994373)
+ - [Java并发编程（8）---并发编程学习总结](https://blog.csdn.net/u014534808/article/details/103178938)
 
-**博客地址：**
-
-[Java并发编程（一）---原子性，可见性，有序性](https://blog.csdn.net/u014534808/article/details/102782286)
 
 2. [第二篇：原子类的说明与使用](https://blog.csdn.net/u014534808/article/details/104044380)
 3. [第三篇：Lock的学习与使用](https://blog.csdn.net/u014534808/article/details/104042598)
