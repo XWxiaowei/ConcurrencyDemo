@@ -24,7 +24,7 @@ public class ExectorTest {
 //                , new ThreadPoolExecutor.CallerRunsPolicy()
         );
         for (int i=0;i<20;i++) {
-            executorService.submit(()->{
+            executorService.execute(()->{
                 System.out.println(Thread.currentThread().getName()+" 开始执行任务");
                 int j = 10000 * 10000;
                 while (j >0) {
