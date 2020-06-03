@@ -1,5 +1,6 @@
 package chapter_1.reentrantLock;
 
+import java.util.Collections;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class MyThreadService {
     final Lock lock = new ReentrantLock();
+
 
     public void printThread() {
         lock.lock();

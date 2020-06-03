@@ -11,7 +11,7 @@ public class AtomicLongTest {
 
 
     public  void countTest() {
-        for (int i = 0; i < 600000; i++) {
+        for (int i = 0; i < 100000; i++) {
             atest.getAndIncrement();
         }
     }
