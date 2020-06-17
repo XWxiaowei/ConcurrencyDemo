@@ -26,17 +26,14 @@ public class HashMapThreadTest {
         //并发计数器
         final CountDownLatch countDownLatch = new CountDownLatch(1000);
         for (int i = 0; i < 1000; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            new Thread(() -> {
 //                    int i1 = at.incrementAndGet();
 //                    countDownLatch.countDown();
 //                    //向map中添加元素
 //                    map.put(i1, i1);
-                    int i1 = at.incrementAndGet();
-                    map.put(i1, i1);
-                    countDownLatch.countDown();
-                }
+                int i1 = at.incrementAndGet();
+                map.put(i1, i1);
+                countDownLatch.countDown();
             }).start();
         }
         countDownLatch.await();

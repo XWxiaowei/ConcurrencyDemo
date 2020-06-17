@@ -24,16 +24,13 @@ public class HashMapThreadTest3 {
 
         final AtomicInteger atomicInteger = new AtomicInteger(0);
         for (int i = 0; i < 6; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    int andGet = 0;
-                    while (andGet < 100000) {
-                        paramMap.put(andGet, andGet);
-                        andGet = atomicInteger.incrementAndGet();
-                    }
-                    countDownLatch.countDown();
+            new Thread(() -> {
+                int andGet = 0;
+                while (andGet < 100000) {
+                    paramMap.put(andGet, andGet);
+                    andGet = atomicInteger.incrementAndGet();
                 }
+                countDownLatch.countDown();
             }).start();
         }
         countDownLatch.await();

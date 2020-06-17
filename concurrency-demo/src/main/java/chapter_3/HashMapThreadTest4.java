@@ -18,21 +18,13 @@ public class HashMapThreadTest4 {
         //并发计数器
         final CountDownLatch countDownLatch = new CountDownLatch(2);
         map.put(3, 3);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                map.put(5, 5);
-                countDownLatch.countDown();
-            }
-        }).start();
+        new Thread(()->{
+            map.put(5, 5);
+            countDownLatch.countDown();}).start();
 
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        map.put(4, 4);
-                        countDownLatch.countDown();
-                    }
+        new Thread(() -> {
+                    map.put(4, 4);
+                    countDownLatch.countDown();
                 }
         ).start();
         countDownLatch.await();
